@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme-source="system">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>কথন — লেখার কমিউনিটি</title>
+<meta name="description" content="কথন: কবিতা, গল্প, উপন্যাস, প্রবন্ধ ও সাহিত্যের একটি খোলা লেখার কমিউনিটি।">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#1b1a4e">
+<!-- Apply saved (or device) theme and language before first paint -->
+<script>
+(function () {
+  var d = document.documentElement, t = null, l = null;
+  try { t = localStorage.getItem('kothon:theme'); l = localStorage.getItem('kothon:lang'); } catch (e) {}
+  if (t !== 'dark' && t !== 'light') { t = (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'; }
+  d.setAttribute('data-theme', t);
+  d.lang = (l === 'en') ? 'en' : 'bn';
+})();
+</script>
+
+<!-- Google Fonts (CSS provides offline fallbacks) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Tiro+Bangla:ital@0;1&display=swap">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">মূল অংশে যান</a>
+
+<!-- ═════════ HEADER / NAV ═════════ -->
+<header class="site-header" id="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#home" aria-label="কথন — হোম পেজ">
+      <span class="brand-mark" aria-hidden="true">ক</span>
+      <span class="brand-name">কথন</span>
+    </a>
+
+    <div class="header-tools">
+      <button class="icon-btn icon-btn-text" id="lang-toggle" type="button" aria-label="Switch to English" title="Switch to English">EN</button>
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="রাত মোডে যান" title="রাত মোডে যান">
+        <svg class="ico ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="currentColor"/></svg>
+        <svg class="ico ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+      </button>
+    </div>
+
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="মেনু খুলুন">
+      <span class="menu-bar"></span><span class="menu-bar"></span><span class="menu-bar"></span>
+    </button>
+
+    <nav class="main-nav" id="main-nav" aria-label="প্রধান মেনু">
+      <ul class="nav-list">
+        <li><a class="nav-link" href="#home" data-route="home">হোম</a></li>
+        <li><a class="nav-link" href="#cat/poetry" data-route="cat" data-cat="poetry">কবিতা</a></li>
+        <li><a class="nav-link" href="#cat/stories" data-route="cat" data-cat="stories">গল্প</a></li>
+        <li><a class="nav-link" href="#cat/novels" data-route="cat" data-cat="novels">উপন্যাস</a></li>
+        <li><a class="nav-link" href="#cat/articles" data-route="cat" data-cat="articles">প্রবন্ধ</a></li>
+        <li><a class="nav-link" href="#cat/literature" data-route="cat" data-cat="literature">সাহিত্য</a></li>
+        <li><a class="nav-link" href="#about" data-route="about">আমাদের কথা</a></li>
+      </ul>
+
+      <!-- Guest state -->
+      <div class="nav-auth" id="nav-guest">
+        <a class="btn btn-primary btn-sm" href="#login" data-route="login">লগইন</a>
+      </div>
+
+      <!-- Logged-in state (hidden until JS shows it) -->
+      <div class="nav-auth" id="nav-user" hidden>
+        <a class="btn btn-gold btn-sm" href="#write" data-route="write">লিখুন</a>
+        <a class="nav-user" href="#my" id="nav-username" data-route="my" aria-label="আমার লেখাসমূহ"></a>
+        <button class="btn btn-ghost btn-sm" id="btn-logout" type="button">লগআউট</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ═════════ MAIN ═════════ -->
+<main id="main" tabindex="-1">
+
+  <!-- ───── HOME ───── -->
+  <section class="page" id="page-home" data-page="home" aria-labelledby="home-title" hidden>
+    <div class="hero">
+      <div class="hero-shapes" aria-hidden="true">
+        <span class="shape shape-1"></span><span class="shape shape-2"></span>
+        <span class="shape shape-3"></span><span class="shape shape-4"></span>
+      </div>
+      <div class="container hero-inner">
+        <h1 class="hero-title" id="home-title">কথন</h1>
+        <p class="hero-tagline">মনের কথা, কলমের ভাষায় — সবার জন্য একটি খোলা আসর।</p>
+        <div class="hero-actions">
+          <a class="btn btn-gold btn-lg" id="hero-cta" href="#write">আপনার লেখা প্রকাশ করুন</a>
+          <a class="btn btn-outline-light btn-lg" href="#about">কথন কী?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2 class="section-title">বিষয় বেছে নিন</h2>
+      <ul class="cat-shortcuts" aria-label="বিভাগসমূহ">
+        <li><a class="cat-tile" data-cat="poetry" href="#cat/poetry"><span class="cat-tile-name">কবিতা</span><span class="cat-tile-en">Poetry</span><span class="cat-tile-count" data-count="poetry"></span></a></li>
+        <li><a class="cat-tile" data-cat="stories" href="#cat/stories"><span class="cat-tile-name">গল্প</span><span class="cat-tile-en">Stories</span><span class="cat-tile-count" data-count="stories"></span></a></li>
+        <li><a class="cat-tile" data-cat="novels" href="#cat/novels"><span class="cat-tile-name">উপন্যাস</span><span class="cat-tile-en">Novels</span><span class="cat-tile-count" data-count="novels"></span></a></li>
+        <li><a class="cat-tile" data-cat="articles" href="#cat/articles"><span class="cat-tile-name">প্রবন্ধ</span><span class="cat-tile-en">Articles</span><span class="cat-tile-count" data-count="articles"></span></a></li>
+        <li><a class="cat-tile" data-cat="literature" href="#cat/literature"><span class="cat-tile-name">সাহিত্য</span><span class="cat-tile-en">Literature</span><span class="cat-tile-count" data-count="literature"></span></a></li>
+      </ul>
+
+      <h2 class="section-title">সাম্প্রতিক লেখা</h2>
+
+      <!-- Search / filter / sort toolbar (home) -->
+      <form class="toolbar" id="home-toolbar" role="search" aria-label="লেখা খুঁজুন" onsubmit="return false">
+        <div class="field field-grow">
+          <label class="sr-only" for="home-search">খুঁজুন</label>
+          <input class="input" type="search" id="home-search" placeholder="শিরোনাম, লেখক বা লেখার অংশ খুঁজুন…" autocomplete="off">
+        </div>
+        <div class="field">
+          <label class="sr-only" for="home-filter">বিভাগ</label>
+          <select class="input" id="home-filter">
+            <option value="all">সব বিভাগ</option>
+            <option value="poetry">কবিতা</option>
+            <option value="stories">গল্প</option>
+            <option value="novels">উপন্যাস</option>
+            <option value="articles">প্রবন্ধ</option>
+            <option value="literature">সাহিত্য</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="sr-only" for="home-sort">সাজান</label>
+          <select class="input" id="home-sort">
+            <option value="newest">নতুন আগে</option>
+            <option value="oldest">পুরনো আগে</option>
+          </select>
+        </div>
+      </form>
+
+      <p class="result-info" id="home-info" aria-live="polite"></p>
+      <div class="post-grid" id="home-list"></div>
+      <div class="empty-state" id="home-empty" hidden>
+        <p class="empty-title">কোনো লেখা পাওয়া যায়নি</p>
+        <p class="empty-text">অন্য শব্দে খুঁজে দেখুন, অথবা ফিল্টার বদলান।</p>
+      </div>
+      <div class="load-more-wrap"><button class="btn btn-outline" id="home-more" type="button" hidden>আরও দেখুন</button></div>
+    </div>
+  </section>
+
+  <!-- ───── ABOUT ───── -->
+  <section class="page" id="page-about" data-page="about" aria-labelledby="about-title" hidden>
+    <div class="page-head">
+      <div class="container">
+        <h1 class="page-title" id="about-title">আমাদের কথা</h1>
+        <p class="page-lead">কথন এমন একটি জায়গা, যেখানে যে কেউ নিজের লেখা প্রকাশ করতে এবং অন্যের লেখা পড়তে পারেন।</p>
+      </div>
+    </div>
+    <div class="container prose-wrap">
+      <article class="prose">
+        <h2>কথন কী</h2>
+        <p>“কথন” মানে বলা, আলাপ। এই প্ল্যাটফর্মে কবি, গল্পকার, ঔপন্যাসিক ও প্রাবন্ধিকেরা নিজেদের লেখা একসঙ্গে প্রকাশ করেন। কোনো ইমেইল বা যাচাইকরণ লাগে না — শুধু একটি ইউজারনেম ও পাসওয়ার্ড।</p>
+        <h2>কীভাবে কাজ করে</h2>
+        <ol class="steps">
+          <li><strong>নিবন্ধন করুন।</strong> ইউজারনেম ও পাসওয়ার্ড দিয়ে অ্যাকাউন্ট খুলুন।</li>
+          <li><strong>লিখুন।</strong> বিভাগ বেছে নিন, শিরোনাম দিন, এডিটরে লেখা সাজান। চাইলে ছবি বা ভিডিও যোগ করুন।</li>
+          <li><strong>প্রকাশ করুন।</strong> প্রকাশ করলেই লেখা হোম পেজ ও সংশ্লিষ্ট বিভাগে দেখা যাবে।</li>
+          <li><strong>পরিচালনা করুন।</strong> “আমার লেখা” পাতা থেকে নিজের লেখা সম্পাদনা বা মুছে ফেলুন।</li>
+        </ol>
+        <h2>লেখকেরা যা করতে পারেন</h2>
+        <ul class="ticks">
+          <li>কবিতা, গল্প, উপন্যাস, প্রবন্ধ ও সাহিত্য — পাঁচ বিভাগে লেখা প্রকাশ</li>
+          <li>বোল্ড, ইটালিক, শিরোনাম, উদ্ধৃতি ও তালিকাসহ সমৃদ্ধ এডিটর</li>
+          <li>ঐচ্ছিক কভার ছবি এবং YouTube বা সরাসরি ভিডিও লিংক</li>
+          <li>স্বয়ংক্রিয় ড্রাফট সংরক্ষণ — ভুলে পাতা বন্ধ হলেও লেখা হারায় না</li>
+          <li>নিজের লেখা যেকোনো সময় সম্পাদনা ও মুছে ফেলা</li>
+        </ul>
+        <h2>আপনার তথ্য কোথায় থাকে</h2>
+        <p>সব লেখা ও অ্যাকাউন্টের তথ্য অনলাইন সার্ভারে সংরক্ষিত থাকে, তাই যেকোনো ডিভাইস থেকে লগইন করা যায়। পাসওয়ার্ড হ্যাশ করে রাখা হয়, সাধারণ লেখা হিসেবে নয়।</p>
+        <p class="prose-cta"><a class="btn btn-primary" href="#login">যোগ দিন</a></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ───── CATEGORY ───── -->
+  <section class="page" id="page-category" data-page="cat" aria-labelledby="cat-title" hidden>
+    <div class="page-head" id="cat-head">
+      <div class="container">
+        <h1 class="page-title" id="cat-title"></h1>
+        <p class="page-lead" id="cat-lead"></p>
+      </div>
+    </div>
+    <div class="container">
+      <form class="toolbar" id="cat-toolbar" role="search" aria-label="এই বিভাগে খুঁজুন" onsubmit="return false">
+        <div class="field field-grow">
+          <label class="sr-only" for="cat-search">খুঁজুন</label>
+          <input class="input" type="search" id="cat-search" placeholder="এই বিভাগে খুঁজুন…" autocomplete="off">
+        </div>
+        <div class="field">
+          <label class="sr-only" for="cat-sort">সাজান</label>
+          <select class="input" id="cat-sort">
+            <option value="newest">নতুন আগে</option>
+            <option value="oldest">পুরনো আগে</option>
+          </select>
+        </div>
+      </form>
+      <p class="result-info" id="cat-info" aria-live="polite"></p>
+      <div class="post-grid" id="cat-list"></div>
+      <div class="empty-state" id="cat-empty" hidden>
+        <p class="empty-title" id="cat-empty-title">এই বিভাগে এখনও কোনো লেখা নেই</p>
+        <p class="empty-text">প্রথম লেখাটি আপনার হতে পারে।</p>
+        <a class="btn btn-primary" href="#write">লেখা শুরু করুন</a>
+      </div>
+      <div class="load-more-wrap"><button class="btn btn-outline" id="cat-more" type="button" hidden>আরও দেখুন</button></div>
+    </div>
+  </section>
+
+  <!-- ───── LOGIN / REGISTER ───── -->
+  <section class="page" id="page-login" data-page="login" aria-labelledby="auth-title" hidden>
+    <div class="container auth-wrap">
+      <div class="auth-card">
+        <h1 class="auth-title" id="auth-title">কথনে স্বাগতম</h1>
+
+        <div class="tabs" role="tablist" aria-label="লগইন বা নিবন্ধন">
+          <button class="tab is-active" id="tab-login" type="button" role="tab" aria-selected="true" aria-controls="panel-login">লগইন</button>
+          <button class="tab" id="tab-register" type="button" role="tab" aria-selected="false" aria-controls="panel-register" tabindex="-1">নিবন্ধন</button>
+        </div>
+
+        <!-- Login panel -->
+        <form class="auth-form" id="panel-login" role="tabpanel" aria-labelledby="tab-login" novalidate>
+          <div class="field">
+            <label for="login-username">ইউজারনেম</label>
+            <input class="input" type="text" id="login-username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+          </div>
+          <div class="field">
+            <label for="login-password">পাসওয়ার্ড</label>
+            <div class="pw-wrap">
+              <input class="input" type="password" id="login-password" name="password" autocomplete="current-password" required>
+              <button class="pw-toggle" type="button" data-toggle-pw="login-password" aria-label="পাসওয়ার্ড দেখান">দেখান</button>
+            </div>
+          </div>
+          <p class="form-error" id="login-error" role="alert" hidden></p>
+          <button class="btn btn-primary btn-block" type="submit" id="login-submit">লগইন করুন</button>
+          <p class="auth-switch">অ্যাকাউন্ট নেই? <button class="link-btn" type="button" data-switch-tab="register">নিবন্ধন করুন</button></p>
+        </form>
+
+        <!-- Register panel -->
+        <form class="auth-form" id="panel-register" role="tabpanel" aria-labelledby="tab-register" novalidate hidden>
+          <div class="field">
+            <label for="reg-username">ইউজারনেম</label>
+            <input class="input" type="text" id="reg-username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="24" aria-describedby="reg-username-hint" required>
+            <p class="hint" id="reg-username-hint">৩–২৪ অক্ষর। বাংলা/ইংরেজি অক্ষর, সংখ্যা, ডট (.), আন্ডারস্কোর (_) ও হাইফেন (-) চলবে।</p>
+          </div>
+          <div class="field">
+            <label for="reg-password">পাসওয়ার্ড</label>
+            <div class="pw-wrap">
+              <input class="input" type="password" id="reg-password" name="password" autocomplete="new-password" aria-describedby="reg-password-hint" required>
+              <button class="pw-toggle" type="button" data-toggle-pw="reg-password" aria-label="পাসওয়ার্ড দেখান">দেখান</button>
+            </div>
+            <p class="hint" id="reg-password-hint">কমপক্ষে ৪ অক্ষর।</p>
+          </div>
+          <div class="field">
+            <label for="reg-password2">পাসওয়ার্ড আবার দিন</label>
+            <input class="input" type="password" id="reg-password2" name="password2" autocomplete="new-password" required>
+          </div>
+          <p class="form-error" id="register-error" role="alert" hidden></p>
+          <button class="btn btn-primary btn-block" type="submit" id="register-submit">অ্যাকাউন্ট খুলুন</button>
+          <p class="auth-switch">আগে থেকেই অ্যাকাউন্ট আছে? <button class="link-btn" type="button" data-switch-tab="login">লগইন করুন</button></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── SINGLE POST ───── -->
+  <section class="page" id="page-post" data-page="post" aria-labelledby="post-title" hidden>
+    <article class="container post-view" id="post-view">
+      <a class="back-link" href="#home" id="post-back">← ফিরে যান</a>
+      <header class="post-header">
+        <a class="tag" id="post-tag" href="#home"></a>
+        <h1 class="post-title" id="post-title"></h1>
+        <p class="post-meta">
+          <span class="post-author" id="post-author"></span>
+          <span class="post-date" id="post-date"></span>
+          <span class="post-edited" id="post-edited" hidden></span>
+          <span class="post-read" id="post-read"></span>
+        </p>
+      </header>
+      <figure class="post-cover" id="post-cover" hidden>
+        <img id="post-cover-img" alt="" decoding="async">
+      </figure>
+      <div class="post-video" id="post-video" hidden></div>
+      <div class="post-body" id="post-body"></div>
+      <footer class="post-footer" id="post-owner-actions" hidden>
+        <a class="btn btn-outline btn-sm" id="post-edit-link" href="#my">সম্পাদনা</a>
+        <button class="btn btn-danger btn-sm" id="post-delete-btn" type="button">মুছে ফেলুন</button>
+      </footer>
+    </article>
+  </section>
+
+  <!-- ───── WRITE / EDIT ───── -->
+  <section class="page" id="page-write" data-page="write" aria-labelledby="write-title" hidden>
+    <div class="container write-wrap">
+      <h1 class="page-title page-title-sm" id="write-title">নতুন লেখা</h1>
+
+      <form class="write-form" id="write-form" novalidate>
+        <input type="hidden" id="post-id" value="">
+
+        <div class="field">
+          <label for="post-title-input">শিরোনাম <span class="req" aria-hidden="true">*</span></label>
+          <input class="input input-lg" type="text" id="post-title-input" maxlength="120" autocomplete="off" aria-describedby="title-counter title-error" required>
+          <div class="field-foot">
+            <p class="form-error" id="title-error" role="alert" hidden></p>
+            <span class="counter" id="title-counter" aria-live="off">০ / ১২০</span>
+          </div>
+        </div>
+
+        <div class="field field-narrow">
+          <label for="post-category">বিভাগ</label>
+          <select class="input" id="post-category">
+            <option value="poetry">কবিতা</option>
+            <option value="stories">গল্প</option>
+            <option value="novels">উপন্যাস</option>
+            <option value="articles">প্রবন্ধ</option>
+            <option value="literature">সাহিত্য</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <span class="label" id="editor-label">লেখা <span class="req" aria-hidden="true">*</span></span>
+          <div class="editor-box">
+            <div class="editor-toolbar" role="toolbar" aria-label="লেখা সাজানোর টুল" aria-controls="editor">
+              <button type="button" class="tb" data-cmd="bold" aria-label="বোল্ড" title="বোল্ড (Ctrl+B)"><b>B</b></button>
+              <button type="button" class="tb" data-cmd="italic" aria-label="ইটালিক" title="ইটালিক (Ctrl+I)"><i>I</i></button>
+              <button type="button" class="tb" data-cmd="underline" aria-label="আন্ডারলাইন" title="আন্ডারলাইন (Ctrl+U)"><u>U</u></button>
+              <span class="tb-sep" aria-hidden="true"></span>
+              <button type="button" class="tb tb-text" data-cmd="formatBlock" data-val="h2" aria-label="বড় শিরোনাম">বড় শিরোনাম</button>
+              <button type="button" class="tb tb-text" data-cmd="formatBlock" data-val="h3" aria-label="উপশিরোনাম">উপশিরোনাম</button>
+              <button type="button" class="tb tb-text" data-cmd="formatBlock" data-val="blockquote" aria-label="উদ্ধৃতি">উদ্ধৃতি</button>
+              <button type="button" class="tb tb-text" data-cmd="formatBlock" data-val="p" aria-label="সাধারণ অনুচ্ছেদ">অনুচ্ছেদ</button>
+              <span class="tb-sep" aria-hidden="true"></span>
+              <button type="button" class="tb tb-text" data-cmd="insertUnorderedList" aria-label="বুলেট তালিকা">• তালিকা</button>
+              <button type="button" class="tb tb-text" data-cmd="insertOrderedList" aria-label="ক্রমিক তালিকা">১. তালিকা</button>
+              <span class="tb-sep" aria-hidden="true"></span>
+              <button type="button" class="tb tb-text" data-cmd="justifyLeft" aria-label="বামে সাজান">বাম</button>
+              <button type="button" class="tb tb-text" data-cmd="justifyCenter" aria-label="মাঝে সাজান">মাঝ</button>
+              <button type="button" class="tb tb-text" data-cmd="justifyRight" aria-label="ডানে সাজান">ডান</button>
+              <span class="tb-sep" aria-hidden="true"></span>
+              <button type="button" class="tb tb-text" data-cmd="undo" aria-label="আনডু">আনডু</button>
+              <button type="button" class="tb tb-text" data-cmd="redo" aria-label="রিডু">রিডু</button>
+              <button type="button" class="tb tb-text" data-cmd="removeFormat" aria-label="ফরম্যাট মুছুন">ফরম্যাট মুছুন</button>
+            </div>
+            <div class="editor" id="editor" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="editor-label" data-placeholder="এখানে আপনার লেখা শুরু করুন…" spellcheck="true"></div>
+          </div>
+          <div class="field-foot">
+            <p class="form-error" id="body-error" role="alert" hidden></p>
+            <span class="counter" id="editor-stats" aria-live="polite">০ শব্দ · পড়তে ০ মিনিট</span>
+          </div>
+        </div>
+
+        <!-- Cover image (optional) -->
+        <fieldset class="optional-box">
+          <legend>কভার ছবি <small>(ঐচ্ছিক)</small></legend>
+          <div class="cover-drop" id="cover-drop">
+            <input class="sr-only" type="file" id="cover-input" accept="image/png,image/jpeg,image/webp,image/gif">
+            <label class="btn btn-outline btn-sm" for="cover-input" id="cover-pick">ছবি বেছে নিন</label>
+            <span class="hint">PNG, JPG, WebP বা GIF। ছবি স্বয়ংক্রিয়ভাবে ছোট করে সংরক্ষিত হবে।</span>
+          </div>
+          <div class="cover-preview" id="cover-preview" hidden>
+            <img id="cover-preview-img" alt="কভার ছবির প্রিভিউ">
+            <button class="btn btn-danger btn-sm" id="cover-remove" type="button">ছবি সরান</button>
+          </div>
+          <p class="form-error" id="cover-error" role="alert" hidden></p>
+        </fieldset>
+
+        <!-- Video link (optional) -->
+        <fieldset class="optional-box">
+          <legend>ভিডিও লিংক <small>(ঐচ্ছিক)</small></legend>
+          <div class="field">
+            <label class="sr-only" for="video-input">ভিডিও লিংক</label>
+            <input class="input" type="url" id="video-input" placeholder="YouTube লিংক অথবা .mp4 / .webm ফাইলের লিংক" autocomplete="off" inputmode="url">
+          </div>
+          <p class="form-error" id="video-error" role="alert" hidden></p>
+          <div class="video-preview" id="video-preview" hidden></div>
+        </fieldset>
+
+        <div class="write-foot">
+          <p class="draft-status" id="draft-status" aria-live="polite"></p>
+          <div class="write-actions">
+            <button class="btn btn-ghost" id="write-cancel" type="button">বাতিল</button>
+            <button class="btn btn-primary btn-lg" id="write-publish" type="submit">প্রকাশ করুন</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ───── MY POSTS ───── -->
+  <section class="page" id="page-my" data-page="my" aria-labelledby="my-title" hidden>
+    <div class="page-head">
+      <div class="container my-head">
+        <div>
+          <h1 class="page-title" id="my-title">আমার লেখা</h1>
+          <p class="page-lead" id="my-count" aria-live="polite"></p>
+        </div>
+        <a class="btn btn-gold" href="#write">নতুন লেখা</a>
+      </div>
+    </div>
+    <div class="container">
+      <div class="post-grid" id="my-list"></div>
+      <div class="empty-state" id="my-empty" hidden>
+        <p class="empty-title">এখনও কোনো লেখা প্রকাশ করেননি</p>
+        <p class="empty-text">আপনার প্রথম লেখাটি আজই প্রকাশ করুন।</p>
+        <a class="btn btn-primary" href="#write">প্রথম লেখাটি লিখুন</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── 404 ───── -->
+  <section class="page" id="page-notfound" data-page="notfound" aria-labelledby="nf-title" hidden>
+    <div class="container empty-state empty-state-lg">
+      <p class="nf-code" aria-hidden="true">৪০৪</p>
+      <h1 class="empty-title" id="nf-title">পাতাটি খুঁজে পাওয়া গেল না</h1>
+      <p class="empty-text" id="nf-text">আপনি যে লেখা বা পাতা খুঁজছেন, সেটি সরানো হয়েছে অথবা ঠিকানাটি ভুল।</p>
+      <a class="btn btn-primary" href="#home">হোম পেজে ফিরুন</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═════════ FOOTER ═════════ -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="brand-mark" aria-hidden="true">ক</span>
+      <p><strong>কথন</strong><br><span class="footer-note">লেখকদের খোলা আসর</span></p>
+    </div>
+    <nav aria-label="ফুটার মেনু">
+      <ul class="footer-links">
+        <li><a href="#home">হোম</a></li>
+        <li><a href="#about">আমাদের কথা</a></li>
+        <li><a href="#cat/poetry">কবিতা</a></li>
+        <li><a href="#cat/stories">গল্প</a></li>
+        <li><a href="#cat/novels">উপন্যাস</a></li>
+        <li><a href="#cat/articles">প্রবন্ধ</a></li>
+        <li><a href="#cat/literature">সাহিত্য</a></li>
+      </ul>
+    </nav>
+    <p class="footer-copy">© <span id="footer-year"></span> কথন। প্রতিটি লেখার স্বত্ব তার লেখকের।</p>
+  </div>
+</footer>
+
+<!-- ═════════ MODAL: CONFIRM (delete / unsaved changes / etc.) ═════════ -->
+<div class="modal-backdrop" id="modal-backdrop" hidden>
+  <div class="modal" id="confirm-modal" role="alertdialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-text">
+    <h2 class="modal-title" id="modal-title"></h2>
+    <p class="modal-text" id="modal-text"></p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="modal-cancel" type="button">বাতিল</button>
+      <button class="btn btn-danger" id="modal-confirm" type="button">নিশ্চিত করুন</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ TOASTS ═════════ -->
+<div class="toast-area" id="toast-area" role="status" aria-live="polite" aria-atomic="false"></div>
+
+<!-- ═════════ TEMPLATES (cloned by script.js) ═════════ -->
+<template id="tpl-post-card">
+  <article class="card" data-cat="">
+    <a class="card-cover" href="#" tabindex="-1" aria-hidden="true" hidden>
+      <img alt="" loading="lazy" decoding="async">
+    </a>
+    <div class="card-body">
+      <a class="tag card-tag" href="#"></a>
+      <h3 class="card-title"><a class="card-link" href="#"></a></h3>
+      <p class="card-excerpt"></p>
+      <p class="card-meta">
+        <span class="card-author"></span>
+        <span class="card-date"></span>
+        <span class="card-edited" hidden>সম্পাদিত</span>
+      </p>
+      <div class="card-actions" hidden>
+        <a class="btn btn-outline btn-sm card-edit" href="#">সম্পাদনা</a>
+        <button class="btn btn-danger btn-sm card-delete" type="button">মুছুন</button>
+      </div>
+    </div>
+  </article>
+</template>
+
+<noscript>
+  <p class="noscript">কথন চালাতে জাভাস্ক্রিপ্ট চালু থাকতে হবে। অনুগ্রহ করে আপনার ব্রাউজারে জাভাস্ক্রিপ্ট চালু করুন।</p>
+</noscript>
+
+<script src="script.js"></script>
+</body>
+</html>
